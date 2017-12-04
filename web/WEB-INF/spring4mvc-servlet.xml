@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+
+    <!-- 启用spring mvc注释 -->
+    <mvc:annotation-driven>
+        <!-- 启动JSON格式的配置 -->
+        <mvc:message-converters>
+            <!-- 这里也可以自己定制class -->
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <!-- 避免ie出现下载文件的情况 -->
+                        <value>text/html;charset=utf-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <!-- 自动扫描的报名，使Spring支持自动检测组件，如注解的Controller -->
+    <context:component-scan base-package="com.crm.controller" />
+    <context:component-scan base-package="com.crm.service" />
+
+    <!-- 试图解析器：定义跳转的文件的前后缀 -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+    <!-- 缓存配置(两种) -->
+    <!-- 启用缓存注解功能(配置在spring的主配置文件当中) -->
+    <cache:annotation-driven cache-manager="cacheManager" />
+    <!-- 若只想使用Spring自身提供的缓存器，则注释掉下面的两个关于Ehcache配置的bean，并启用上面的SimpleCacheManager即可 -->
+    <!-- Spring提供的基于的Ehcache实现的缓存管理器 -->
+    <bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation" value="classpath:ehcache.xml" />
+    </bean>
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager" >
+        <property name="cacheManager" ref="cacheManagerFactory" />
+    </bean>
+
+    <!-- 配置拦截器，多个拦截器，顺序执行 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!--
+                /**的意思是所有文件夹及里面的子文件夹
+                /*是所有文件夹，不含子文件夹
+                /是web项目的根目录
+                exclude-mapping 不拦截的url
+            -->
+            <mvc:mapping path="/"/>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/code" />
+            <mvc:exclude-mapping path="/logout"/>
+            <bean class="com.crm.interceptor.CommonInterceptor" />
+        </mvc:interceptor>
+        <!--
+            当设置多个拦截器时，先按顺序调用preHandler方法，
+            然后逆序调用每个拦截器preHandle和afterCompletion方法
+         -->
+    </mvc:interceptors>
+
+</beans>

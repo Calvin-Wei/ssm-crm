@@ -1,0 +1,56 @@
+a{
+ text-decoration: none;	
+}
+/*
+ * 菜单面板背景
+ * !important 语法优先权
+ */
+.layout-body {
+  background-color: #E9F5E5;
+  color: #000000;
+}
+
+/* 顶部 */
+/* .panel-body-noborder {
+  background-color: #46B43B !important;
+} */
+
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {    
+	width: 12px;
+}
+/* 滚动槽 */
+::-webkit-scrollbar-track {    
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);    
+	border-radius: 10px;
+}
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {    
+	border-radius: 10px;    
+	background: rgba(0,0,0,0.1);    
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {    
+	background: rgba(255,0,0,0.4);
+}
+/*DIV滚动条属性及样式*/
+div{
+	scrollBar-face-color:green; 
+	scrollBar-hightLight-color:red; 
+	scrollBar-3dLight-color:orange; 
+	scrollBar-darkshadow-color:blue; 
+	scrollBar-shadow-color:yellow; 
+	scrollBar-arrow-color:purple; 
+	scrollBar-track-color:#F1FDEF; 
+	scrollBar-base-color:pink; 
+}
+/*
+face-color：滑块颜色
+hightlight-color：高亮颜色
+3dlight-color：三维光线颜色
+darkshadow-color：暗影颜色
+shadow-color：阴影颜色
+arrow-color：箭头颜色
+track-color：滑道颜色
+base-color：DIV滚动条的主要颜色，其中包含滚动按钮和滚动滑块 
+*/
