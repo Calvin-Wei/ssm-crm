@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper>
+    <resultMap id="systemdefResultMap" type="com.wxc.crm.model.Systemdef">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result property="parentid" column="parentid"/>
+    </resultMap>
+    <select id="getAll" resultType="com.wxc.crm.model.Systemdef">
+        SELECT id,parentid,name,(
+        SELECT count(1) from systemdef s WHERE
+        s.parentid!=0 and s.parentid=m.id)
+        countChildrens
+        FROM systemdef m WHERE 1=1
+        <if test="sort!=null and sort!=''">
+            ORDER by #{sort},#{order}
+        </if>
+        <if test="page>0">
+            limit #{start},#{end}
+        </if>
+    </select>
+
+    <select id="getSystemdefById" parameterType="int" resultMap="systemdefResultMap">
+        SELECT * FROM systemdef WHERE id=#{id}
+    </select>
+
+    <insert id="insertSystemdef" parameterType="com.wxc.crm.model.Systemdef">
+        INSERT INTO systemdef (id,name,parentid) VALUES (#{id},#{name},#{parentid})
+    </insert>
+
+    <update id="updateSystemdef" parameterType="com.wxc.crm.model.Systemdef">
+        UPDATE systemdef SET name=#{name},id=#{id},parentid=#{parentid}
+        WHERE id=#{id}
+    </update>
+
+    <delete id="deleteSystemdefById" parameterType="int">
+        DELETE FROM systemdef WHERE id=#{id}
+    </delete>
+
+</mapper>

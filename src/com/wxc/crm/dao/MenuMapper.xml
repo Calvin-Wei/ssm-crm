@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wxc.crm.dao.MenuMapper">
+    <resultMap id="menuResultMap" type="com.wxc.crm.model.SysMenu">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="url" property="url"/>
+        <result column="parentid" property="parentid"/>
+        <result column="enable" property="enable"/>
+        <result column="sequence" property="sequence"/>
+        <result column="iconCls" property="iconCls"/>
+    </resultMap>
+
+    <select id="getDatagridTotal" resultType="long">
+        SELECT count(1) FROM sysmenu WHERE parentid=0
+        <if test="name != null and name!=''">
+            and name LIKE concat ('%',#{name},'%')
+        </if>
+    </select>
+
+    <select id="datagridMenu" resultType="com.wxc.crm.model.SysMenu">
+        SELECT id,name,url FROM sysmenu WHERE parentid=0
+        <if test="sort!=null and sort!=''">
+            ORDER BY #{sort},#{ORDER }
+        </if>
+        <if test="page > 0">
+            limit #{start},#{end}
+        </if>
+    </select>
+
+    <select id="getAll" resultType="com.wxc.crm.model.SysMenu">
+        SELECT id,parentid,sequence,iconCls,name,url,enable from sysmenu
+        WHERE 1=1
+        <if test="sort!=null and sort != '' ">
+            ORDER BY #{sort},#{order}
+        </if>
+        <if test="page>0">
+            limit #{start},#{end}
+        </if>
+    </select>
+
+    <select id="listAllParentMenu" resultMap="menuResultMap">
+      SELECT * from sysmenu WHERE parentid=0 and enable=1
+    </select>
+
+    <select id="listSubMenuByParentid" parameterType="int" resultMap="menuResultMap">
+      SELECT * FROM sysmenu WHERE parentid=#{parentid}
+    </select>
+
+    <select id="getMenuById" parameterType="int" resultMap="menuResultMap">
+        SELECT * FROM sysmenu WHERE id=#{id}
+    </select>
+    <select id="listAllSubMenu" resultMap="menuResultMap">
+        SELECT * from sysmenu WHERE parentid>=1
+    </select>
+    <insert id="insertMenu" parameterType="com.wxc.crm.model.SysMenu"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO sysmenu (name,url,parentid) VALUES (#{name},#{url},#{parentid})
+    </insert>
+
+    <update id="updateMenu" parameterType="com.wxc.crm.model.SysMenu">
+        UPDATE sysmenu SET
+        name =#{name},url=#{url},parentid=#{parentid} WHERE id=#{id}
+    </update>
+    <delete id="deleteMenuById" parameterType="int">
+      DELETE FROM sysmenu WHERE id=#{id} OR parentid=#{id}
+    </delete>
+
+</mapper>
