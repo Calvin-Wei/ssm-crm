@@ -13,7 +13,7 @@ public class Tree {
     private Object attributes;//给一个节点追加的自定义属性
     private List<Tree> children;//定义了一些子节点的节点数组
     private String iconCls;//定义了一些子节点的节点数组
-    private String pid;//定义该节点的父节点
+    private Integer pid;//定义该节点的父节点
 
     public int getId() {
         return id;
@@ -71,11 +71,11 @@ public class Tree {
         this.iconCls = iconCls;
     }
 
-    public String getPid() {
+    public Integer getPid() {
         return pid;
     }
 
-    public void setPid(String pid) {
+    public void setPid(Integer pid) {
         this.pid = pid;
     }
 }
