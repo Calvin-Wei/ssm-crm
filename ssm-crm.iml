@@ -19,6 +19,20 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="crm" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="crm" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Tomcat 8.5.20" level="application_server_libraries" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/web/WEB-INF/lib" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/web/WEB-INF/lib" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/web/WEB-INF/lib" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/web/WEB-INF/lib" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
   </component>
 </module>
