@@ -150,5 +150,7 @@
         </set>
         WHERE id=#{id}
     </update>
-
+    <delete id="deleteUser" parameterType="int">
+        DELETE FROM sysuser WHERE id=#{id}
+    </delete>
 </mapper>

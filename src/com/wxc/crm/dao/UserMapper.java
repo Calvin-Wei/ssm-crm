@@ -19,7 +19,7 @@ public interface UserMapper {
 
     public Long getDatagridTotal(@Param("user") User user,@Param("csysid") Integer sysid);
 
-    public List<User> datagridUser(@Param("page") PageHelper pageHelper);
+    public List<User> datagridUser(@Param("page") PageHelper pageHelper,@Param("csysid")Integer sysid);
 
     public void addUser(User user);
 
