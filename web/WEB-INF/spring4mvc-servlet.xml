@@ -25,8 +25,8 @@
     </mvc:annotation-driven>
 
     <!-- 自动扫描的报名，使Spring支持自动检测组件，如注解的Controller -->
-    <context:component-scan base-package="com.crm.controller" />
-    <context:component-scan base-package="com.crm.service" />
+    <context:component-scan base-package="com.wxc.crm.controller" />
+    <context:component-scan base-package="com.wxc.crm.service" />
 
     <!-- 试图解析器：定义跳转的文件的前后缀 -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -59,7 +59,7 @@
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/code" />
             <mvc:exclude-mapping path="/logout"/>
-            <bean class="com.crm.interceptor.CommonInterceptor" />
+            <bean class="com.wxc.crm.interceptor.CommonInterceptor" />
         </mvc:interceptor>
         <!--
             当设置多个拦截器时，先按顺序调用preHandler方法，
