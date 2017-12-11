@@ -54,7 +54,7 @@
                                value="" style="margin: 0px;vertical-align: middle;padding: 0px;
                                 width: 16px;height: 16px;font-size: 20px;"/>
                         &nbsp;一周内自动登录
-                        <input type="hidden" id="autologinch" name="autologinch" class="autologinch" value="" >
+                        <input type="hidden" id="autologinch" name="autologinch" class="autologinch" value="">
                     </div>
                 </form>
             </div>
@@ -70,7 +70,74 @@
         Copyright &copy;2017 wxc
     </div>
 </div>
-<body>
+
+<script type="text/javascript">
+    var errInfo = "${errInfo}";
+    $(document).ready(function () {
+        changeCode();
+        $("#codeImg").bind("click", changeCode);
+        if (errInfo != "") {
+            if (errInfo.indexOf("验证码") > -1) {
+                $("#codeerr").show();
+                $("#codeerr").html(errInfo);
+                $("#code").focus();
+            } else {
+                $("#nameerr").show();
+                $("#nameerr").html(errInfo);
+            }
+        }
+        $("#loginname").focus();
+    });
+
+    function genTimestamp() {
+        var time = new Date();
+        return time.getTime();
+    }
+
+    function changeCode() {
+        $("#codeImg").attr("src", "code?t=" + genTimestamp());
+    }
+
+    function resetErr() {
+        $("#nameerr").hide();
+        $("#nameerr").html("");
+        $("#pwderr").hide();
+        $("#pwderr").html("");
+        $("#codeerr").hide();
+        $("#codeerr").html("");
+    }
+
+    function check() {
+        resetErr();
+        if ($("#loginname").val() == "") {
+            $("#nameerr").show();
+            $("#nameerr").html("用户名不得为空！");
+            $("#loginname").focus();
+            return false;
+        }
+        if ($("#password").val() == "") {
+            $("#pwderr").show();
+            $("#pwderr").html("密码不得为空！");
+            $("#password").focus();
+            return false;
+        }
+        if ($("#code").val() == "") {
+            $("#codeerr").show();
+            $("#codeerr").html("验证码不得为空！");
+            $("#code").focus();
+            return false;
+        }
+        if ($(".autologin").is(":checked")) {
+            $(".autologinch").val("Y");
+        }
+        return true;
+    }
+
+    function login() {
+        check();
+        document.loginForm.submit();
+    }
+</script>
 
 </body>
 </html>

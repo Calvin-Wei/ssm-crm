@@ -2,6 +2,7 @@ package com.wxc.crm.controller;
 
 import com.wxc.crm.util.common.RandomCodeUtil;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -12,6 +13,7 @@ import java.io.IOException;
 
 @Controller
 public class CodeController {
+    @RequestMapping("/code")
     public void getCode(HttpServletRequest request, HttpServletResponse response){
         RandomCodeUtil rdnu=RandomCodeUtil.Instance();
         HttpSession session=request.getSession();
