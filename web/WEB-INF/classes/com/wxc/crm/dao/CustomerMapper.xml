@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wxc.crm.dao.CustomerMapper">
+    <select id="findByName" resultType="com.wxc.crm.model.Customer">
+        SELECT t.id,t.name,t.address,t.zipcode,t.fax from customer t
+        WHERE t.name LIKE concat('%',#{customername},'%')
+    </select>
+    <select id="getCustomerById" resultType="com.wxc.crm.model.Customer">
+        SELECT t.id,t.name,t.address,t.zipcode,t.fax from customer t
+        WHERE t.id=#{id}
+    </select>
+    <select id="getDatagridTotal" resultType="long">
+        SELECT COUNT(1) FROM customer WHERE 1=1
+        <if test="name != null and name != '' ">
+            and name LIKE concat('%',#{name},'%')
+        </if>
+    </select>
+    <select id="datagridCustomer" resultType="com.wxc.crm.model.Customer">
+        SELECT t.id,t.name,t.address,t.zipcode,t.fax from customer t WHERE
+        <if test="sort!=null and sort!=''">
+            ORDER BY #{sort} #{order}
+        </if>
+        <if test="page>0">
+            limit #{start},#{end}
+        </if>
+    </select>
+    <insert id="addCustomer" useGeneratedKeys="true">
+        INSERT INTO customer(
+        <trim suffixOverrides=",">
+            <if test="name!=null and name != '' ">name,</if>
+            <if test="address!=null and address != '' ">address</if>
+            <if test="zipcode!=null and zipcode!=''">zipcode,</if>
+            <if test="fax!=null and fax!=''">fax</if>
+        </trim>
+        )VALUES (
+        <trim suffixOverrides=",">
+            <if test="name!=null and name!=''">#{name},</if>
+            <if test="address!=null and address!=''">#{address}</if>
+            <if test="zipcode!=null and zipcode!=''">#{zipcode}</if>
+            <if test="fax != null and fax!=''">#{fax}</if>
+        </trim>
+        )
+    </insert>
+    <update id="editCustomer">
+        UPDATE customer
+        <set>
+            <if test="name!=null and name!=''">name=#{name},</if>
+            <if test="address !=null and address!='' ">address=#{address},</if>
+            <if test="zipcode!=null and zipcode!=''">zipcode=#{zipcode},</if>
+            <if test="fax!=null and fax != ''">fax=#{fax}</if>
+        </set>
+    </update>
+    <delete id="deleteCustomer" parameterType="int">
+      delete from customer
+      where id=#{id}
+    </delete>
+</mapper>

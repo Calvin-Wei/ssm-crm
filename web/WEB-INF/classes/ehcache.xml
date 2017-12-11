@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache dynamicConfig="false" monitoring="off" updateCheck="false"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="ehcache.xsd">
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd/">
     <!-- 定义缓存策略
 		eternal="false"   				// 元素是否永恒,如果是就永不过期(必须设置)
 	  	maxEntriesLocalHeap="1000" 		// 堆内存中最大缓存对象数,0没有限制(必须设置)

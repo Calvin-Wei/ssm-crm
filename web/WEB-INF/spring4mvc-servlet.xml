@@ -17,7 +17,7 @@
                 <property name="supportedMediaTypes">
                     <list>
                         <!-- 避免ie出现下载文件的情况 -->
-                        <value>text/html;charset=utf-8</value>
+                        <value>text/html;charset=UTF-8</value>
                     </list>
                 </property>
             </bean>
@@ -30,7 +30,7 @@
 
     <!-- 试图解析器：定义跳转的文件的前后缀 -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="prefix" value="/jsp/" />
         <property name="suffix" value=".jsp" />
     </bean>
 
@@ -40,7 +40,7 @@
     <!-- 若只想使用Spring自身提供的缓存器，则注释掉下面的两个关于Ehcache配置的bean，并启用上面的SimpleCacheManager即可 -->
     <!-- Spring提供的基于的Ehcache实现的缓存管理器 -->
     <bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
-        <property name="configLocation" value="classpath:ehcache.xml" />
+        <property name="configLocation" value="/WEB-INF/config/ehcache.xml" />
     </bean>
     <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager" >
         <property name="cacheManager" ref="cacheManagerFactory" />

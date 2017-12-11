@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wxc.crm.dao.UserMapper">
+    <select id="findUserByName" resultType="com.wxc.crm.model.User">
+        SELECT id,username,password from sysuser WHERE
+        username =#{username}
+    </select>
+    <select id="getUsernameById" resultType="String">
+        SELECT username from sysuser WHERE id=#{id}
+    </select>
+    <select id="getMenuByUserId" resultType="com.wxc.crm.model.SysMenu">
+        SELECT m.id,m.name,m.parentid,m.iconCls,m.url,
+          ( SELECT count(1) FROM sysmenu s
+            WHERE s.parentId!=0 and s.parentid=m.id) countChildrens
+        FROM sysmenu m
+          LEFT JOIN role_menu rm
+          ON m.id=rm.menu_id
+          LEFT JOIN sysrole r
+          ON rm.role_id=r.id
+          LEFT JOIN user_role ur
+          ON r.id=ur.roleId
+          LEFT JOIN sysuser u
+          ON ur.userId=u.id
+          WHERE m.enable=1 and u.id=#{userId}
+          and m.id not in(
+              SELECT tt.id FROM
+              (
+                SELECT m.id,(SELECT count(parentId) FROM sysmenu sp WHERE sp.enable=1 AND sp.parentId=m.id and m.parentId=0)
+                countch FROM sysmenu m WHERE m.parentId=0
+              )tt
+              WHERE countch=0
+          )
+          ORDER BY m.sequence
+    </select>
+
+    <select id="getDatagridTotal" resultType="long">
+        SELECT COUNT(1) FROM sysuser u,systemdef t
+        WHERE u.sysid=t.id
+        <if test="csysid!=null and csysid!='' ">
+            AND (u.sysid=t.id or u.sysid=t.parentid or u.sysid=t.ptopid)
+            AND (t.id=#{csysid} OR t.parentid=#{csysid} OR t.ptopid=#{csysid})
+        </if>
+        <if test="user.username!=null and user.username!='' ">
+            and username like concat('%',#{user.username},'%')
+        </if>
+    </select>
+    <select id="datagridUser" resultType="com.wxc.crm.model.User">
+        SELECT
+        u.id,u.username,u.password,u.email,u.gender,u.qq,u.weixin,u.idcard,
+        t.name sysname,
+        (SELECT name FROM systemdef psys WHERE psys.id=t.ptopid) psyname
+        FROM sysuser u,systemdef t WHERE u.sysid=t.id
+        <if test="csysid!=null and csysid!='' ">
+            AND (u.sysid=t.id OR u.sysid=t.parentid OR u.sysid=t.ptopid)
+            AND (t.id=#{csysid} OR t.parentid=#{csysid} OR t.ptopid=#{csysid})
+        </if>
+        <if test="page.sort!=null and page.sort!='' ">
+            ORDER BY #{page.sort},#{page.order}
+        </if>
+        <if test="page.page>0">
+            limit #{page.start},#{page.end}
+        </if>
+    </select>
+
+    <insert id="addUser" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO sysuser(
+        <trim suffixOverrides=",">
+            <if test="username!=null and username!=''">
+                username,
+            </if>
+            <if test="password!=null and password!=''">
+                password,
+            </if>
+            <if test="idcard!=null and idcard!=''">
+                idcard,
+            </if>
+            <if test="email!=null and email!=''">
+                email,
+            </if>
+            <if test="gender!=null and gender!='' ">
+                gender,
+            </if>
+            <if test="qq!=null and qq!=''">
+                qq,
+            </if>
+            <if test="weixin!=null and weixin!=''">
+                weixin,
+            </if>
+            <if test="regtime!=null and regtime!=''">
+                regtime
+            </if>
+        </trim>
+        )
+        VALUES (
+        <trim suffixOverrides=",">
+            <if test="username!=null and username!=''">
+                #{username},
+            </if>
+            <if test="password!=null and password!=''">
+                #{password},
+            </if>
+            <if test="idcard!=null and idcard!=''">
+                #{idcard},
+            </if>
+            <if test="email!=null and email!=''">
+                #{email},
+            </if>
+            <if test="gender!=null and gender!=''">
+                #{gender},
+            </if>
+            <if test="qq!=null and qq!=''">
+                #{qq},
+            </if>
+            <if test="weixin!=null and weixin!=''">
+                #{weixin},
+            </if>
+            <if test="regtime!=null and regtime!=''">
+                #{regtime}
+            </if>
+        </trim>
+        )
+    </insert>
+    <update id="editUser">
+        update sysuser
+        <set>
+            <if test="username != null and username!=''">
+                username=#{username},
+            </if>
+            <if test="password !=null and password!=''">
+                password=#{password},
+            </if>
+            <if test="idcard!=null and idcard!=''">
+                idcard=#{idcard},
+            </if>
+            <if test="email!=null and email!=''">
+                email=#{email},
+            </if>
+            <if test="gender!=null and gender!=''">
+                gender=#{gender},
+            </if>
+            <if test="qq!=null and qq!=''">
+                qq=#{qq},
+            </if>
+            <if test="weixin!=null and weixin!=''">
+                weixin=#{weixin}
+            </if>
+            <if test="regtime!=null and regtime!=''">
+                regtime=#{regtime}
+            </if>
+        </set>
+        WHERE id=#{id}
+    </update>
+    <delete id="deleteUser" parameterType="int">
+        DELETE FROM sysuser WHERE id=#{id}
+    </delete>
+</mapper>
