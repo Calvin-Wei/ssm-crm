@@ -3,11 +3,11 @@ package com.wxc.crm.service;
 import com.wxc.crm.dao.UserMapper;
 import com.wxc.crm.model.SysMenu;
 import com.wxc.crm.model.User;
-import com.wxc.crm.model.com.wxc.crm.easyui.PageHelper;
+import com.wxc.crm.model.easyui.PageHelper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -23,7 +23,7 @@ import java.util.List;
  */
 @Service
 public class UserService {
-    @Resource
+    @Autowired
     private UserMapper userMapper;
 
     public User findUserByName(String username){

@@ -11,14 +11,19 @@
         </webroots>
       </configuration>
     </facet>
-    <facet type="web" name="Web2">
+    <facet type="Spring" name="Spring">
       <configuration>
-        <descriptors>
-          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/out/artifacts/ssm_crm_war_exploded/WEB-INF/web.xml" />
-        </descriptors>
-        <webroots>
-          <root url="file://$MODULE_DIR$/out/artifacts/ssm_crm_war_exploded" relative="/" />
-        </webroots>
+        <fileset id="web application context" name="MVC application context" removed="true">
+          <file>file://$MODULE_DIR$/web/WEB-INF/config/spring-dao.xml</file>
+          <file>file://$MODULE_DIR$/out/artifacts/ssm_crm_war_exploded/WEB-INF/config/spring-dao.xml</file>
+        </fileset>
+        <fileset id="web spring4mvc servlet context" name="MVC spring4mvc servlet context" removed="true">
+          <file>file://$MODULE_DIR$/out/artifacts/ssm_crm_war_exploded/WEB-INF/spring4mvc-servlet.xml</file>
+        </fileset>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/web/WEB-INF/config/spring-dao.xml</file>
+          <file>file://$MODULE_DIR$/web/WEB-INF/spring4mvc-servlet.xml</file>
+        </fileset>
       </configuration>
     </facet>
   </component>

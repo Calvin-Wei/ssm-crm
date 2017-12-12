@@ -2,7 +2,7 @@ package com.wxc.crm.dao;
 
 import com.wxc.crm.model.SysMenu;
 import com.wxc.crm.model.User;
-import com.wxc.crm.model.com.wxc.crm.easyui.PageHelper;
+import com.wxc.crm.model.easyui.PageHelper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

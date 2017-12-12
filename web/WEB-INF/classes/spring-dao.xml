@@ -8,7 +8,7 @@
     <!-- 该包下的类支持注解，表示会被当作{@code mybatis mapper}处理 配置了之后表示可以自动引入mapper类-->
     <mybatis:scan base-package="com.wxc.crm.dao"/>
     <!-- 引入属性文件-->
-    <context:property-placeholder location="/WEB-INF/config/configuration.properties"/>
+    <context:property-placeholder location="classpath:configuration.properties"/>
 
     <!-- 数据库连接 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">

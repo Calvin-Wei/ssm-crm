@@ -3,7 +3,7 @@ package com.wxc.crm.dao;
 import com.wxc.crm.model.Contact;
 import com.wxc.crm.model.Customer;
 import com.wxc.crm.model.Visitlog;
-import com.wxc.crm.model.com.wxc.crm.easyui.PageHelper;
+import com.wxc.crm.model.easyui.PageHelper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

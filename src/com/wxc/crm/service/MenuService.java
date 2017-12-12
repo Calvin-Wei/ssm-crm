@@ -2,7 +2,7 @@ package com.wxc.crm.service;
 
 import com.wxc.crm.dao.MenuMapper;
 import com.wxc.crm.model.SysMenu;
-import com.wxc.crm.model.com.wxc.crm.easyui.PageHelper;
+import com.wxc.crm.model.easyui.PageHelper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
