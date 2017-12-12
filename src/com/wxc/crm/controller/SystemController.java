@@ -107,8 +107,6 @@ public class SystemController extends BaseController {
     
     /**
      * 获取菜单栏(easyUI Tree)
-     * @param id
-     * @param model
      * @return
      */
     @ResponseBody
