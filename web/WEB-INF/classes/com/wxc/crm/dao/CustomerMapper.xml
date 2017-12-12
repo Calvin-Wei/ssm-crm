@@ -16,7 +16,7 @@
         </if>
     </select>
     <select id="datagridCustomer" resultType="com.wxc.crm.model.Customer">
-        SELECT t.id,t.name,t.address,t.zipcode,t.fax from customer t WHERE
+        SELECT t.id,t.name,t.address,t.zipcode,t.fax from customer t WHERE 1=1
         <if test="sort!=null and sort!=''">
             ORDER BY #{sort} #{order}
         </if>
