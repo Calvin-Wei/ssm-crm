@@ -164,7 +164,7 @@
 		<div id="dlg-buttons">
 			<a href="javascript:void(0)" class="easyui-linkbutton c6"
 				iconCls="icon-ok" onclick="saveObject()" style="width:90px">保存</a> 
-				<a href="javascript:void(0)" class="easyui-linkbutton"
+			<a href="javascript:void(0)" class="easyui-linkbutton"
 				iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')"
 				style="width:90px">取消</a>
 		</div>

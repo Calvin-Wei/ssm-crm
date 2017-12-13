@@ -61,7 +61,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="bottom">Copyright &copy; 2015 xxx</div>
+	<div class="bottom">Copyright &copy; 2017 xxx</div>
 </div>
 <script type="text/javascript">
 	var errInfo = "${errInfo}";

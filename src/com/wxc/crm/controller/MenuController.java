@@ -62,7 +62,6 @@ public class MenuController extends BaseController {
     public DataGrid datagrid(PageHelper page, SysMenu menu) {
         DataGrid dg = new DataGrid();
         dg.setTotal(menuService.getDatagridTotal(menu));
-
         List<SysMenu> menuList = menuService.datagridMenu(page);
         dg.setRows(menuList);
 

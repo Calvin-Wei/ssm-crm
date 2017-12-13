@@ -44,6 +44,7 @@
             and username like concat('%',#{user.username},'%')
         </if>
     </select>
+
     <select id="datagridUser" resultType="com.wxc.crm.model.User">
         SELECT
         u.id,u.username,u.password,u.email,u.gender,u.qq,u.weixin,u.idcard,

@@ -31,7 +31,7 @@ public class UserController {
 	
 	@Resource
 	private UserService userService;
-	
+
 	/**
 	 * 跳转到用户表格页面
 	 * @return

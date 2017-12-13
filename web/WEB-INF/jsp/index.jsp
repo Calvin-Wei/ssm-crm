@@ -96,7 +96,7 @@
         
         <!-- 正下方panel -->  
         <div region="south" style="height:24px;line-height:22px;" align="center">  
-            <label style="font-size:11px;">CRM-V5.0&nbsp;&nbsp;&nbsp;[&nbsp;walk_hai@163.com&nbsp;]</label>  
+            <label style="font-size:11px;">CRM-V7.0&nbsp;&nbsp;&nbsp;[&nbsp;519462367@qq.com&nbsp;]</label>
         </div>   
     </body>
 </html>
